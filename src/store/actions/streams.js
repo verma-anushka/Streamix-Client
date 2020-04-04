@@ -9,6 +9,20 @@ import {
   EDIT_STREAM,
 } from "./types";
 
+export const fetchStreams = () => {
+  return async (dispatch) => {
+    const response = await streams.get("/streams");
+    dispatch({ type: FETCH_STREAMS, payload: response.data });
+  };
+};
+
+export const fetchStream = (id) => {
+  return async (dispatch) => {
+    const response = await streams.get(`/streams/${id}`);
+    dispatch({ type: FETCH_STREAM, payload: response.data });
+  };
+};
+
 export const createStream = (formValues) => {
   return async (dispatch, getState) => {
     const { userId } = getState().auth;
